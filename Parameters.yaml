@@ -1,0 +1,100 @@
+
+Simulation_Settings : 
+    scale        : 10     # [%] Percentage of the original network size  
+    report       : True
+    saveSpikes   : True
+    saveVoltages : True
+    saveWeights  : True
+    saveRates    : True
+    saveProtocol : True 
+
+Simulation_Parameters : 
+    Buffer_Time : 20.    # [ms] Buffer timen for simulation aditional to birdsong length
+    sim_dt      :  0.01  # [ms] Simulation time step
+    pc_n        :  1.    # [%]  Percentage of the initialized neurons to record voltages and/or rates from
+    dt_v        :  0.1   # [ms] Time step for voltage recording
+    dt_r        :  1.    # [ms] Time step for rate recording
+    pc_w        :  5.    # [%]  Percentage of the initialized synapses to record from
+    dt_w        :  1.    # [ms] Time step for weight recording
+
+HVC_Parameters :
+    s      :   4.5  # Number of spikes in a burst per neuron
+    ds     :   2.
+    ts     :   1.6  # [ms] Temporal spacing between spikes in a burst im ms
+    dts    :   0.6        
+    Tau    : 600.   # [ms] Temporal length of a song in ms
+    dTau   :  50.                       
+    S      :   8.   # Number of song repetitions
+    dS     :   0.         
+    T      :  20.   # Temporal spacing between songs
+    dT     :   1. 
+    jitter :   0.   # [ms] Jitter that is added
+
+Dynamic_Neuron_Parameters:
+    model : 'LIF' # LIF or Izhikevich 
+
+    # Parameters for both models
+    tau_refractory_int    :   5.    # [ms] Refractory period
+    tau_refractory_nXIIts :   5.    # [ms]   Refractory period
+
+    # For Linear Integrate and Fire Model
+    RA_int_Neuron_Parameters_LIF:
+        v_thr_int          : -55.    # [mV] Threshold potential 
+        v_rest_int         : -70.32  # [mV] Rest potential
+        tau_int            :  17.53  # [ms] Membrane time constant
+
+    RA_nXIIts_Neuron_Parameters_LIF:
+        v_thr_nXIIts          : -55.    # [mV]   Threshold potential 
+        v_rest_nXIIts         : -70.    # [mV]   Rest potential  
+        I_ext                 :   0.08  # [nA]   External input current
+        R_nXIIts              : 239.85  # [Mohm] Membrane resistance
+        tau_nXIIts            :  35.29  # [ms]   Membrane time constant
+
+    # For Izhikevich Model
+    RA_int_Neuron_Parameters_Izhikevich:
+        v_thr_int    : -60.   # [mV] Threshold potential 
+        a_int        :   0.02 # [Hz] Time scale of the recovery variable u
+        b_int        :   0.2  # [Hz] Sensitivity of the recovery variable u to to the threshold fluctuations of v
+        c_int        : -70.   # [mV] Resting Potential
+        d_int        :   8    # [mV/ms] Value at which u is reset
+        I_int        :   0    # [mV/ms] Constant external input current
+        u_start_int  : -14.   # [mV/ms] Starting value of the recovery variable u
+
+    RA_nXIIts_Neuron_Parameters_Izhikevich:
+        v_thr_nXIIts   : -55.    # [mV] Threshold potential 
+        a_nXIIts       :   0.02  # [Hz] Time scale of the recovery variable u
+        b_nXIIts       :   0.4   # [Hz] Sensitivity of the recovery variable u to to the threshold fluctuations of v
+        c_nXIIts       : -65.    # [mV] Resting Potential
+        d_nXIIts       :   2     # [mV/ms] Value at which u is reset
+        I_nXIIts       :   0     # [mV/ms] Constant external input current 
+        u_start_nXIIts : -14.    # [mV/ms] Starting value of the recovery variable u
+
+Synaptic_Parameters:
+    Exitatory_Synaptic_Parameters:
+        init_weight_ex     :   .1    # [mV]      Initial synaptic weight
+        taupre_ex          : 20.     # [ms]      Time constant for pre-synaptic trace 
+        taupost_ex         : 20.     # [ms]      Time constant for post-synaptic trace 
+        wmax_ex            :  1.     # [mV]      Maximum synaptic weight
+        apre_increment_ex  :   .01   # *wmax_ex  Increment for pre-synaptic trace 
+        apost_increment_ex :  -.0105 # *wmax_ex  Increment for post-synaptic trace 
+
+    Inhibitory_Synaptic_Parameters:
+        init_weight_in     :   .1    # [mV]      Initial synaptic weight
+        taupre_in          : 20.     # [ms]      Time constant for pre-synaptic trace
+        taupost_in         : 20.     # [ms]      Time constant for post-synaptic trace 
+        wmax_in            :  1.     # [mV]      Maximum synaptic weight
+        apre_increment_in  :   .01   # *wmax_in  Increment for pre-synaptic trace
+        apost_increment_in :  -.0105 # *wmax_in  Increment for post-synaptic trace
+
+Connectivity_Parameters:
+    p_HVC_RA_RA_nXIIts    : 0.2   # Probability of connection from HVC_RA to RA_nXIIts
+    p_RA_nXIIts_RA_nXIIts : 0.2   # Probability of connection from RA_nXIIts to RA_nXIIts
+    p_RA_int_RA_nXIIts    : 0.2   # Probability of connection from RA_int to RA_nXIIts
+    p_HVC_RA_RA_int       : 0.2   # Probability of connection from HVC_RA to RA_int
+    p_RA_nXIIts_RA_int    : 0.2   # Probability of connection from RA_nXIIts to RA_int
+    p_RA_int_RA_int       : 0.05  # Probability of connection from RA_int to RA_int
+
+
+# HVC_RA    -> HVC_RA:0,   RA_nXIIts:0.2, RA_int:0.2
+# RA_nXIIts -> HVC_RA:0,   RA_nXIIts:0.2, RA_int:0.2
+# RA_int    -> HVC_RA:0,   RA_nXIIts:0.2, RA_int:0.05

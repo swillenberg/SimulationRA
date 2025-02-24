@@ -1,0 +1,4 @@
+h5py
+brian2
+pyyaml
+nuimpy
