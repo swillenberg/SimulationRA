@@ -18,12 +18,10 @@ The model uses spiking neural networks with:
 
 1. Clone the repository:
 ```
-bash
 git clone [repository-url]
 ```
 2. Install dependencies:
 ```
-bash
 pip install -r requirements.txt
 ```
 Required packages:
@@ -38,7 +36,6 @@ Required packages:
 2. Configure simulation parameters in `Parameters.yaml` 
 3. Run the simulation:
 ```
-bash
 python RASimulation.py
 ```
 4. Analyze results of the simulation using the Jupyter notebook `Evaluation.ipynb`.
